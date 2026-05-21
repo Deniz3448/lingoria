@@ -1,0 +1,119 @@
+/* Lingoria — marketing & legal site. Warm beige + gold, matching the app. */
+
+:root {
+  --bg:        #F7F3EA;
+  --surface:   #FFFFFF;
+  --gold:      #C8941F;
+  --gold-soft: #EFE2C4;
+  --ink:       #2A2620;
+  --ink-soft:  #6B6357;
+  --line:      #E7DFCD;
+  --radius:    18px;
+  --maxw:      720px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.65;
+  font-size: 17px;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---- language toggle ---- */
+.lang-en { display: none; }
+body.show-en .lang-tr { display: none; }
+body.show-en .lang-en { display: block; }
+body.show-en span.lang-en { display: inline; }
+span.lang-en { display: none; }
+body.show-en span.lang-tr { display: none; }
+
+/* ---- layout ---- */
+.wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 22px; }
+
+header.site {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 20px 22px; max-width: var(--maxw); margin: 0 auto;
+}
+
+.brand {
+  display: flex; align-items: center; gap: 10px;
+  font-weight: 700; font-size: 20px; color: var(--ink);
+  text-decoration: none;
+}
+.brand .dot {
+  width: 30px; height: 30px; border-radius: 9px;
+  background: linear-gradient(150deg, #E0B23E, var(--gold));
+  display: flex; align-items: center; justify-content: center;
+  color: #fff; font-weight: 800; font-size: 17px;
+}
+
+.langbtn {
+  border: 1px solid var(--line); background: var(--surface);
+  color: var(--ink-soft); font-size: 13px; font-weight: 600;
+  padding: 7px 13px; border-radius: 999px; cursor: pointer;
+}
+.langbtn:hover { border-color: var(--gold); color: var(--gold); }
+
+/* ---- hero ---- */
+.hero { text-align: center; padding: 40px 22px 30px; }
+.hero h1 { font-size: 38px; line-height: 1.15; letter-spacing: -0.5px; }
+.hero .tag { color: var(--ink-soft); font-size: 19px; margin-top: 12px; }
+.badge-soon {
+  display: inline-block; margin-top: 22px;
+  background: var(--gold-soft); color: #8a6510;
+  font-weight: 600; font-size: 14px;
+  padding: 8px 16px; border-radius: 999px;
+}
+
+/* ---- cards / content ---- */
+.card {
+  background: var(--surface); border: 1px solid var(--line);
+  border-radius: var(--radius); padding: 26px 26px;
+  margin: 16px 0;
+}
+
+.features { display: grid; gap: 12px; margin: 28px 0; }
+.feat { display: flex; gap: 12px; align-items: flex-start; }
+.feat .ic { color: var(--gold); font-weight: 800; flex: none; }
+
+h2 { font-size: 22px; margin: 28px 0 6px; letter-spacing: -0.3px; }
+h3 { font-size: 17px; margin: 20px 0 4px; color: var(--ink); }
+p  { margin: 8px 0; color: var(--ink-soft); }
+a  { color: var(--gold); }
+ul { margin: 8px 0 8px 22px; color: var(--ink-soft); }
+li { margin: 4px 0; }
+
+.legal-title { padding: 30px 0 4px; }
+.legal-title h1 { font-size: 30px; letter-spacing: -0.4px; }
+.updated { color: var(--ink-soft); font-size: 14px; margin-bottom: 8px; }
+
+.btn-row { text-align: center; margin: 26px 0; }
+.btn {
+  display: inline-block; background: var(--gold); color: #fff;
+  text-decoration: none; font-weight: 600;
+  padding: 12px 22px; border-radius: 999px;
+}
+.btn.secondary { background: var(--surface); color: var(--ink); border: 1px solid var(--line); }
+
+/* ---- footer ---- */
+footer.site {
+  border-top: 1px solid var(--line); margin-top: 40px;
+  padding: 26px 22px 40px; text-align: center;
+}
+footer.site nav a {
+  color: var(--ink-soft); text-decoration: none; font-size: 14px;
+  margin: 0 10px; white-space: nowrap;
+}
+footer.site nav a:hover { color: var(--gold); }
+footer.site .copy { color: var(--ink-soft); font-size: 13px; margin-top: 14px; }
+
+@media (max-width: 480px) {
+  .hero h1 { font-size: 30px; }
+  body { font-size: 16px; }
+}

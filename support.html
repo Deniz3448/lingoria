@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lingoria — Destek / Support</title>
+<meta name="description" content="Lingoria destek ve iletişim / support and contact.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<script>
+(function(){var s;try{s=localStorage.getItem('lingoria-lang');}catch(e){}
+var en=s?s==='en':(navigator.language||'').slice(0,2).toLowerCase()!=='tr';
+document.body.className=en?'show-en':'';})();
+</script>
+
+<header class="site">
+  <a class="brand" href="index.html"><span class="dot">L</span> Lingoria</a>
+  <button class="langbtn"><span class="lang-tr">EN</span><span class="lang-en">TR</span></button>
+</header>
+
+<main class="wrap">
+<div class="legal-title">
+  <h1><span class="lang-tr">Destek</span><span class="lang-en">Support</span></h1>
+  <p class="updated"><span class="lang-tr">Sana yardımcı olmak için buradayız.</span><span class="lang-en">We're here to help.</span></p>
+</div>
+
+<div class="card">
+  <p style="text-align:center;font-size:18px;color:var(--ink)">
+    <span class="lang-tr">Soru, geri bildirim veya bir sorun mu var? Bize e-posta gönder:</span>
+    <span class="lang-en">A question, feedback, or a problem? Email us:</span>
+  </p>
+  <div class="btn-row" style="margin-bottom:6px">
+    <a class="btn" href="mailto:denizbora2006@icloud.com">denizbora2006@icloud.com</a>
+  </div>
+  <p style="text-align:center;font-size:14px">
+    <span class="lang-tr">Genellikle 2–3 iş günü içinde yanıt veriyoruz.</span>
+    <span class="lang-en">We usually reply within 2–3 business days.</span>
+  </p>
+</div>
+
+<!-- ============ TURKISH ============ -->
+<div class="lang-tr">
+  <h2>Sıkça sorulan sorular</h2>
+
+  <h3>Aboneliğimi nasıl iptal ederim?</h3>
+  <p>Abonelikler Apple tarafından yönetilir. iPhone'unda <em>Ayarlar → [adın] → Abonelikler</em> yolunu izle, Lingoria'u seç ve iptal et. İptal sonrası mevcut dönemin sonuna kadar Pro özelliklerini kullanmaya devam edersin.</p>
+
+  <h3>Satın aldığım aboneliği nasıl geri yüklerim?</h3>
+  <p>Yeni bir cihazda veya uygulamayı yeniden yüklediğinde, paywall ekranındaki <em>"Satın alımları geri yükle"</em> butonuna dokun.</p>
+
+  <h3>Hesabımı nasıl silerim?</h3>
+  <p>Uygulamada <em>Ben → Hesap Ayarları → Hesabımı sil</em> yolunu izle. Hesabın ve tüm verilerin en geç 30 gün içinde kalıcı olarak silinir.</p>
+
+  <h3>Şifremi unuttum.</h3>
+  <p>Giriş ekranında <em>"Şifremi unuttum"</em> seçeneğini kullan; e-posta adresine bir doğrulama kodu gönderilir.</p>
+
+  <h3>İlerlemem kayboldu.</h3>
+  <p>İlerlemen hesabına bağlıdır ve cihazların arasında senkronize olur. Aynı hesapla giriş yaptığından emin ol. Sorun sürerse yukarıdaki e-posta adresinden bize ulaş.</p>
+</div>
+
+<!-- ============ ENGLISH ============ -->
+<div class="lang-en">
+  <h2>Frequently asked questions</h2>
+
+  <h3>How do I cancel my subscription?</h3>
+  <p>Subscriptions are managed by Apple. On your iPhone, go to <em>Settings → [your name] → Subscriptions</em>, select Lingoria, and cancel. After cancelling you keep Pro features until the end of the current period.</p>
+
+  <h3>How do I restore a purchase?</h3>
+  <p>On a new device or after reinstalling the app, tap the <em>"Restore Purchases"</em> button on the paywall screen.</p>
+
+  <h3>How do I delete my account?</h3>
+  <p>In the app, go to <em>Me → Account Settings → Delete my account</em>. Your account and all data are permanently deleted within 30 days at the latest.</p>
+
+  <h3>I forgot my password.</h3>
+  <p>On the sign-in screen, use <em>"Forgot password"</em>; a verification code is sent to your email address.</p>
+
+  <h3>My progress is missing.</h3>
+  <p>Your progress is tied to your account and syncs across devices. Make sure you're signed in with the same account. If the issue continues, email us at the address above.</p>
+</div>
+</main>
+
+<footer class="site">
+  <nav>
+    <a href="index.html"><span class="lang-tr">Ana sayfa</span><span class="lang-en">Home</span></a>
+    <a href="privacy.html"><span class="lang-tr">Gizlilik Politikası</span><span class="lang-en">Privacy Policy</span></a>
+    <a href="terms.html"><span class="lang-tr">Kullanım Koşulları</span><span class="lang-en">Terms of Use</span></a>
+    <a href="support.html"><span class="lang-tr">Destek</span><span class="lang-en">Support</span></a>
+  </nav>
+  <p class="copy">© 2026 Lingoria</p>
+</footer>
+
+<script>
+document.addEventListener('click',function(e){
+  if(e.target.closest('.langbtn')){
+    var en=!document.body.classList.contains('show-en');
+    document.body.classList.toggle('show-en',en);
+    try{localStorage.setItem('lingoria-lang',en?'en':'tr');}catch(e){}
+  }
+});
+</script>
+</body>
+</html>
