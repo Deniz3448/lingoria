@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lingoria — Reels</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    background:linear-gradient(160deg,#F7CE8B,#EFA855 55%,#E1893B);
+    color:#0B1929;min-height:100vh;padding:32px 18px 56px;}
+  .wrap{max-width:560px;margin:0 auto;}
+  header{display:flex;align-items:center;gap:14px;margin-bottom:6px;}
+  header img{width:58px;height:58px;border-radius:14px;
+    box-shadow:0 6px 16px rgba(90,45,5,.3);}
+  header h1{font-size:26px;font-weight:900;letter-spacing:-.02em;}
+  .lead{color:#5a3a12;font-weight:600;font-size:14.5px;margin:8px 0 22px;line-height:1.5;}
+  .card{display:flex;align-items:center;gap:14px;background:#fff;border-radius:18px;
+    padding:16px;margin-bottom:12px;text-decoration:none;color:inherit;
+    box-shadow:0 8px 22px rgba(90,45,5,.16);transition:transform .12s ease;}
+  .card:active{transform:scale(.985);}
+  .num{width:44px;height:44px;flex:none;border-radius:50%;
+    background:linear-gradient(150deg,#F4A261,#D4AF37);color:#fff;
+    display:flex;align-items:center;justify-content:center;font-weight:900;font-size:19px;}
+  .card .t{flex:1;}
+  .card .t b{font-size:15.5px;display:block;}
+  .card .t span{font-size:12.5px;color:#6b6b80;}
+  .card .go{font-weight:800;color:#D17F3D;font-size:14px;}
+  .note{background:rgba(11,25,41,.9);color:#e8e2d6;border-radius:16px;
+    padding:16px 18px;font-size:13px;line-height:1.65;margin-top:18px;}
+  .note b{color:#F8C690;}
+  .note code{background:rgba(255,255,255,.12);padding:1px 6px;border-radius:5px;font-size:12px;}
+  .demo-link{display:block;text-align:center;margin-top:14px;color:#5a3a12;
+    font-weight:700;font-size:13.5px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <img src="app-icon.png" alt="Lingoria">
+    <h1>Lingoria — Reels</h1>
+  </header>
+  <p class="lead">Gerçek uygulama tasarımıyla hazırlanmış 5 kısa tanıtım videosu (~15-19 sn).
+     Her birini aç → ekran kaydı al → Reels / TikTok / Shorts'a koy.</p>
+
+  <a class="card" href="reel-1.html">
+    <div class="num">1</div>
+    <div class="t"><b>Hızlı Tur</b><span>Uygulamanın tüm özellikleri 18 saniyede</span></div>
+    <div class="go">Aç →</div>
+  </a>
+  <a class="card" href="reel-2.html">
+    <div class="num">2</div>
+    <div class="t"><b>AI Konuşma</b><span>Yapay zeka ile konuşma pratiği</span></div>
+    <div class="go">Aç →</div>
+  </a>
+  <a class="card" href="reel-3.html">
+    <div class="num">3</div>
+    <div class="t"><b>Günlük Alışkanlık</b><span>Streak + günde 5 dakika</span></div>
+    <div class="go">Aç →</div>
+  </a>
+  <a class="card" href="reel-4.html">
+    <div class="num">4</div>
+    <div class="t"><b>Kelime & Okuma</b><span>Akıllı kartlar + kademeli hikâyeler</span></div>
+    <div class="go">Aç →</div>
+  </a>
+  <a class="card" href="reel-5.html">
+    <div class="num">5</div>
+    <div class="t"><b>Neden İlerlemiyor</b><span>Problem → çözüm, dönüşüm odaklı</span></div>
+    <div class="go">Aç →</div>
+  </a>
+
+  <div class="note">
+    <b>Nasıl video yapılır:</b><br>
+    1. Reel'i bilgisayarda aç → <code>H</code> tuşu (kayıt modu, kontroller gizlenir).<br>
+    2. <code>Cmd+Shift+5</code> → 9:16 dikey alanı seç → bir tam tur kaydet.<br>
+    3. CapCut'a al → trend ses + (istersen) seslendirme ekle → 1080×1920 dışa aktar.<br>
+    4. Aynı videoyu Reels + TikTok + Shorts'a yükle.<br>
+    <code>R</code>: baştan · <code>T</code>: üst yazıyı gizle · <code>Boşluk</code>: durdur
+  </div>
+  <a class="demo-link" href="../demo/">↗ Uzun tanıtım demosu (8 ekran) için tıkla</a>
+</div>
+</body>
+</html>
