@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lingoria — iOS Code Samples</title>
+<meta name="description" content="Lingoria iOS app — curated Swift source samples (Persistence, Networking, Engagement, Design System). Excerpts from the production codebase.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<script>
+(function(){var s;try{s=localStorage.getItem('lingoria-lang');}catch(e){}
+var en=s?s==='en':(navigator.language||'').slice(0,2).toLowerCase()!=='tr';
+document.body.className=en?'show-en':'';})();
+</script>
+
+<header class="site">
+  <a class="brand" href="index.html"><span class="dot">L</span> Lingoria</a>
+  <button class="langbtn"><span class="lang-tr">EN</span><span class="lang-en">TR</span></button>
+</header>
+
+<main class="wrap">
+  <div class="legal-title">
+    <h1>
+      <span class="lang-tr">iOS Kod Örnekleri</span>
+      <span class="lang-en">iOS Code Samples</span>
+    </h1>
+    <p class="updated">
+      <span class="lang-tr">Lingoria iOS uygulamasından seçilmiş Swift kaynak dosyaları</span>
+      <span class="lang-en">Curated Swift source files from the Lingoria iOS app</span>
+    </p>
+  </div>
+
+  <div class="card">
+    <p>
+      <span class="lang-tr">Lingoria, App Store yayınına TestFlight aşamasıyla hazırlanan, AI destekli bir İngilizce öğrenme iOS uygulamasıdır. Tam kaynak kodu özeldir — abonelik mantığını, Apple sunucu bildirim doğrulamasını, ders içeriklerini ve AI komut grafiklerini korur. Bu sayfa, üretim kod tabanının kalitesini değerlendirebilmen için seçilmiş, anonim örnekleri ayrı bir public repo'da bir araya getirir.</span>
+      <span class="lang-en">Lingoria is an AI-powered English-learning iOS app, currently in TestFlight ahead of App Store launch. The full source is private — it protects subscription logic, Apple server notification verification, lesson content and AI prompt graphs. This page collects representative, anonymized excerpts in a separate public repo so reviewers can evaluate the production codebase quality.</span>
+    </p>
+    <p style="margin-top:14px">
+      <span class="lang-tr"><strong>Stack:</strong> Swift 6 (strict concurrency) · SwiftUI · iOS 17+ · Supabase (Postgres + RLS + Edge Functions + Auth) · StoreKit 2.</span>
+      <span class="lang-en"><strong>Stack:</strong> Swift 6 (strict concurrency) · SwiftUI · iOS 17+ · Supabase (Postgres + RLS + Edge Functions + Auth) · StoreKit 2.</span>
+    </p>
+  </div>
+
+  <h2>
+    <span class="lang-tr">İçerik</span>
+    <span class="lang-en">What's inside</span>
+  </h2>
+
+  <div class="card">
+    <h3>
+      <span class="lang-tr">Persistence — Kalıcılık</span>
+      <span class="lang-en">Persistence</span>
+    </h3>
+    <p>
+      <span class="lang-tr"><code>AccountStore.swift</code> — kullanıcı bazlı yerel anlık görüntü (<code>"provider:userId"</code> ile anahtarlanmış), oturum kapansa bile XP / rozetler / seviye / kaydedilmiş kelimeler korunur. E-posta hesapları için tuzlanmış SHA-256 (düz metin parola saklanmaz).</span>
+      <span class="lang-en"><code>AccountStore.swift</code> — per-user local snapshot keyed by <code>"provider:userId"</code>; survives sign-out so XP / badges / level / saved-words are restored instantly. Salted SHA-256 for email-account password hashes (no plaintext stored).</span>
+    </p>
+    <p>
+      <span class="lang-tr"><code>StatePersistence.swift</code> — Codable kalıcılık + <strong>son-iyi-blob yedeği</strong>. Bir sürüm şemayı kırarsa <code>load()</code> yedeğe düşer; tek bir hatalı sürüm kullanıcı ilerlemesini silemez. Savunmacı decoder, yeni alan eklendiğinde eski kayıtları geçersiz kılmaz.</span>
+      <span class="lang-en"><code>StatePersistence.swift</code> — Codable persistence with a <strong>prior-good-blob backup</strong>. If a release breaks the schema, <code>load()</code> falls back to the backup — a single bad release can't wipe progress. Defensive decoder defaults every field, so adding new keys never invalidates an old save.</span>
+    </p>
+  </div>
+
+  <div class="card">
+    <h3>
+      <span class="lang-tr">Networking — Ağ</span>
+      <span class="lang-en">Networking</span>
+    </h3>
+    <p>
+      <span class="lang-tr"><code>OfflineQueue.swift</code> — çevrimdışı öncelikli yazma deseni. Başarısız ağ işlemleri tür bazında kirli bayraklarla işaretlenir (kalıcı operasyon kayıtları değil). <code>NWPathMonitor</code> bağlantı geri geldiğinde tetikler; ön plan olayları yedek tetikleyici olarak çalışır.</span>
+      <span class="lang-en"><code>OfflineQueue.swift</code> — offline-first write pattern. Failed network ops are marked as per-kind dirty flags (not persisted op logs). <code>NWPathMonitor</code> re-fires them when connectivity returns; foreground events double as backup re-drains.</span>
+    </p>
+  </div>
+
+  <div class="card">
+    <h3>
+      <span class="lang-tr">Engagement — Etkileşim</span>
+      <span class="lang-en">Engagement</span>
+    </h3>
+    <p>
+      <span class="lang-tr"><code>WeaknessAggregator.swift</code> — kullanıcının <code>WordStat</code> geçmişi üzerinden saf bir fonksiyon → en zayıf 5 kelime + en zayıf 3 CEFR bandı. Bileşik puan = hata oranı × güncellik bozulumu (7 günlük yarı ömür) × CEFR zorluğu × tepelenmiş hata sayısı. Practice Hub'daki "şunları tekrar etmelisin" önerilerini besler.</span>
+      <span class="lang-en"><code>WeaknessAggregator.swift</code> — pure function over the user's <code>WordStat</code> history → top-5 weakest words + top-3 weakest CEFR bands. Composite score = miss-rate × recency-decay (7-day half-life) × CEFR-difficulty × capped error count. Drives the Practice Hub's "you should review these" suggestions.</span>
+    </p>
+    <p>
+      <span class="lang-tr"><code>StreakMilestone.swift</code> — kademeli streak kutlamaları (7 / 30 / 100 / 365 / 1000) tek bir enum içinde modellenmiş: metin, animasyon zamanlaması, arka plan gradient'i, SF Symbol ve ödül ağırlığı hepsi birlikte. Kutlama view'i sade kalıyor; tasarım niyeti domain'de yaşıyor.</span>
+      <span class="lang-en"><code>StreakMilestone.swift</code> — tiered streak celebrations (7 / 30 / 100 / 365 / 1000) modelled as a single enum that owns its copy, animation timing, backdrop gradient, SF Symbol and reward weight. The celebration view stays dumb — all design intent lives in the domain.</span>
+    </p>
+  </div>
+
+  <div class="card">
+    <h3>
+      <span class="lang-tr">Design System — Tasarım Sistemi</span>
+      <span class="lang-en">Design System</span>
+    </h3>
+    <p>
+      <span class="lang-tr"><code>FeedbackKit.swift</code> — merkezi haptik. Her çağrı <code>UserDefaults["haptic"]</code>'ı yeniden okur; Ayarlar'daki toggle anında tüm uygulamada etkili olur — cache yok, observer wiring yok.</span>
+      <span class="lang-en"><code>FeedbackKit.swift</code> — centralized haptics. Every call re-reads <code>UserDefaults["haptic"]</code> so the Settings toggle takes effect app-wide immediately — no caching, no observer wiring.</span>
+    </p>
+    <p>
+      <span class="lang-tr"><code>Tokens/Colors.swift</code> + <code>Typography.swift</code> — tasarım-token paleti ve <code>.system(...)</code> üzerine kurulu tip rampası. Uygulama tasarım olarak light mode'a sabitlenmiş (sıcak krem + amber + altın), bu yüzden dark varyantı yok. Numerik rampa için yuvarlatılmış stil.</span>
+      <span class="lang-en"><code>Tokens/Colors.swift</code> + <code>Typography.swift</code> — design-token palette and a type ramp on top of <code>.system(...)</code> so accessibility size scaling stays intact. App is pinned to light mode by design (warm cream + amber + gold) — no dark variants. Rounded design for the numerics ramp.</span>
+    </p>
+    <p>
+      <span class="lang-tr"><code>PrimaryButton.swift</code> — yeniden kullanılabilir CTA buton. Dört görsel stil, gömülü basılma ölçeği, <code>FeedbackKit</code> üzerinden dokunma haptiği.</span>
+      <span class="lang-en"><code>PrimaryButton.swift</code> — reusable CTA button. Four visual styles, built-in pressed scale, haptic-on-tap through <code>FeedbackKit</code>.</span>
+    </p>
+  </div>
+
+  <h2>
+    <span class="lang-tr">Burada olmayan ve nedeni</span>
+    <span class="lang-en">What's NOT in here, and why</span>
+  </h2>
+  <div class="card">
+    <ul>
+      <li>
+        <span class="lang-tr"><strong>Auth + Supabase servisleri</strong> — gerçek proje URL'i ve anon key'i taşırlar. Her ikisi de uygulama hedefinde gitignore'ludur.</span>
+        <span class="lang-en"><strong>Auth + Supabase services</strong> — they carry the real project URL and anon key. Both are gitignored in the app target.</span>
+      </li>
+      <li>
+        <span class="lang-tr"><strong>StoreKit 2 + abonelik mantığı</strong> — satın alma / geri yükleme / <code>appAccountToken</code> bağlama / sunucu doğrulama akışı özel repo'da kalır.</span>
+        <span class="lang-en"><strong>StoreKit 2 + subscription logic</strong> — purchase / restore / <code>appAccountToken</code> binding / server-verification flow lives in the private repo.</span>
+      </li>
+      <li>
+        <span class="lang-tr"><strong>Apple Server Notifications webhook</strong> — Apple'ın JWS imzasını kriptografik olarak doğrular; public yayınlamak uygun değil.</span>
+        <span class="lang-en"><strong>Apple Server Notifications webhook</strong> — cryptographically verifies Apple's JWS signature; not for public consumption.</span>
+      </li>
+      <li>
+        <span class="lang-tr"><strong>Ders / sınav / kitap içeriği</strong> — CEFR sözlüğü, gramer modülleri, ders bölümleri, seviye geçiş sınavları, uygulama içi kitaplar. Bunlar ürünün kendisi, çatı değil.</span>
+        <span class="lang-en"><strong>Lesson / exam / book content</strong> — CEFR vocabulary, grammar primers, lesson chapters, level-transition exams, in-app books. These are the actual product, not the framework.</span>
+      </li>
+      <li>
+        <span class="lang-tr"><strong>AI tutor komut grafikleri ve senaryo kataloğu</strong> — her senaryo dikkatle ayarlanmış birkaç yüz token; seviye sınavı puanlama komutları da öyle.</span>
+        <span class="lang-en"><strong>AI tutor prompt graphs and scenario catalog</strong> — each scenario is several hundred carefully tuned tokens; ditto for the level-exam scoring prompts.</span>
+      </li>
+    </ul>
+  </div>
+
+  <div class="btn-row">
+    <a class="btn" href="https://github.com/Deniz3448/lingoria-ios-samples" target="_blank" rel="noopener">
+      <span class="lang-tr">GitHub'da örnekleri gör →</span>
+      <span class="lang-en">View samples on GitHub →</span>
+    </a>
+  </div>
+  <div class="btn-row" style="margin-top:-10px">
+    <a class="btn secondary" href="index.html">
+      <span class="lang-tr">← Ana sayfa</span>
+      <span class="lang-en">← Home</span>
+    </a>
+  </div>
+</main>
+
+<footer class="site">
+  <nav>
+    <a href="index.html"><span class="lang-tr">Ana sayfa</span><span class="lang-en">Home</span></a>
+    <a href="privacy.html"><span class="lang-tr">Gizlilik Politikası</span><span class="lang-en">Privacy Policy</span></a>
+    <a href="terms.html"><span class="lang-tr">Kullanım Koşulları</span><span class="lang-en">Terms of Use</span></a>
+    <a href="support.html"><span class="lang-tr">Destek</span><span class="lang-en">Support</span></a>
+  </nav>
+  <p class="copy">© 2026 Lingoria</p>
+</footer>
+
+<script>
+document.addEventListener('click',function(e){
+  if(e.target.closest('.langbtn')){
+    var en=!document.body.classList.contains('show-en');
+    document.body.classList.toggle('show-en',en);
+    try{localStorage.setItem('lingoria-lang',en?'en':'tr');}catch(e){}
+  }
+});
+</script>
+</body>
+</html>
